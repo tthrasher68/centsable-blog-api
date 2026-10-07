@@ -1,15 +1,14 @@
 import { layoutView } from './layout.js';
 
 export function blogPostView(post) {
-  const content = `
-    <article>
-      <h2>${post.title}</h2>
-      <p class="post-date">Published ${new Date(post.created_at).toLocaleDateString()}</p>
-      <div class="post-content">
-        ${post.content}
-      </div>
-      <p><a href="/api/blog">← Back to all posts</a></p>
+  const date = new Date(post.created_at).toLocaleDateString();
+
+  return layoutView(`
+    <article class="card">
+      <div class="meta">Published ${date}</div>
+      <h1>${post.title}</h1>
+      <div class="post-content">${post.content}</div>
+      <p><a href="/blog" class="small-link">← Back to all posts</a></p>
     </article>
-  `;
-  return layoutView(content);
+  `);
 }
